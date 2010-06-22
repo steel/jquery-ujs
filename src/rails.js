@@ -124,4 +124,18 @@ jQuery(function ($) {
                  .val(input.data('enable-with'));
         });
     });
+
+	/**
+	 * disable-with handlers for non-ajax forms
+	 */
+	var non_ajax_disable_with_input_selector = 'input[data-disable-with]';
+    var non_ajax_disable_with_form_selector = 'form:not([data-remote]):has(' + disable_with_input_selector + ')';
+
+    $(non_ajax_disable_with_form_selector).live('submit', function () {
+        $(this).find(disable_with_input_selector).each(function () {
+            var input = $(this);
+            input.attr('value', input.attr('data-disable-with'))
+                 .attr('disabled', 'disabled');
+        });
+    });
 });
